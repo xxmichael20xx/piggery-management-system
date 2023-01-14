@@ -1,7 +1,10 @@
 import _ from 'lodash';
 window._ = _;
 
-import 'bootstrap';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
+
+import '@fortawesome/fontawesome-free/js/all.js';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
