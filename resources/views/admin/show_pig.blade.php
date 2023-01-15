@@ -236,7 +236,6 @@
             });
         </script>
     @endif
-@endif
 @endsection
 
 @section('js')
