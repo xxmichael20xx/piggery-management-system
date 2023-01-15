@@ -42,8 +42,8 @@
                     <li class="nav-item dropdown pe-3">
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                             data-bs-toggle="dropdown">
-                            <img src="{{ asset('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-                            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                            <img src="{{ asset('assets/img/profile-img.png') }}" alt="Profile" class="rounded-circle">
+                            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -55,19 +55,17 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <i class="bi bi-person"></i>
-                                    <span>My Profile</span>
-                                </a>
-                            </li>
-                            <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <i class="bi bi-box-arrow-right"></i>
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out-alt me-2"></i>
                                     <span>Sign Out</span>
                                 </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </li>
@@ -78,34 +76,68 @@
         <aside id="sidebar" class="sidebar">
             <ul class="sidebar-nav" id="sidebar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                        <i class="bi bi-grid"></i>
-                        <span>Dashboard</span>
+                    <a class="nav-link {{ Route::is('admin.dashboard') ? '' : 'text-dark bg-white' }}" href="{{ route('admin.dashboard') }}">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span class="ms-2">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-menu-button-wide"></i>
-                        <span>Components</span>
-                        <i class="bi bi-chevron-down ms-auto"></i>
+                    <a class="nav-link {{ Route::is('admin.pigs') ? '' : 'text-dark bg-white' }}" href="{{ route('admin.pigs') }}">
+                        <i class="fa-solid fa-piggy-bank"></i>
+                        <span class="ms-2">Manage Pigs</span>
                     </a>
-                    <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.breeds') ? '' : 'text-dark bg-white' }}" href="{{ route('admin.breeds') }}">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                        <span class="ms-2">Manage Breeds</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.quarantine') ? '' : 'text-dark bg-white' }}" href="{{ route('admin.quarantine') }}">
+                        <i class="fa-solid fa-house-lock"></i>
+                        <span class="ms-2">Manage Quarantine</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.orders') ? '' : 'text-dark bg-white' }}" data-bs-target="#orders-nav" data-bs-toggle="collapse" href="#" aria-expanded="true">
+                        <i class="fa-solid fa-boxes-packing"></i>
+                        <span class="ms-2">Manage Orders</span>
+                        <i class="fa-solid fa-angle-down ms-auto"></i>
+                    </a>
+                    <ul id="orders-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" style="">
                         <li>
-                            <a href="components-alerts.html">
-                                <i class="bi bi-circle"></i><span>Alerts</span>
+                            <a href="{{ route('admin.orders', ['type' => 'pending_orders']) }}" class="text-decoration-none">
+                                Pending Orders
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.orders', ['type' => 'sold']) }}" class="text-decoration-none">
+                                Sold
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.logs') ? '' : 'text-dark bg-white' }}" href="{{ route('admin.logs') }}">
+                        <i class="fa-solid fa-list"></i>
+                        <span class="ms-2">View Logs</span>
+                    </a>
                 </li>
             </ul>
         </aside>
 
         <main id="main" class="main">
-            <div class="pagetitle">
-                <h1>{{ $pageTitle ?? '' }}</h1>
-            </div>
+            <div class="container-fluid">
+                <div class="pagetitle d-flex">
+                    <h1>{{ $pageTitle ?? '' }}</h1>
+                    @if (isset($back))
+                        <a href="{{ $back }}" class="btn btn-dark ms-3"><i class="fa-solid fa-circle-chevron-left"></i> Go back</a>
+                    @endif
+                </div>
 
-            @yield('content')
+                @yield('content')
+            </div>
         </main>
     @endauth
 
