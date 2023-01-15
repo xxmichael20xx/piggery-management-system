@@ -28,7 +28,11 @@ class AdminController extends Controller
     }
 
     public function pigs( Request $request ) {
-        $pigs = Pig::where( 'status', '!=', 'quarantined' )->latest()->paginate( 10 );
+        $pigs = Pig::where( 'status', '!=', 'quarantined' )
+            ->where( 'status', '!=', 'sold' )
+            ->where( 'status', '!=', 'pending_orders' )
+            ->latest()
+            ->paginate( 10 );
         $pigsCount = Pig::count();
         $breeds = Breed::latest()->get();
         $statuses = $this->statuses();
