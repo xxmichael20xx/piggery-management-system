@@ -46,7 +46,7 @@
                                             <tr>
                                                 <th scope="row">{{ $quarantine->id }}</th>
                                                 <td>{{ $quarantine->pig->pig_no }}</td>
-                                                <td>{{ $quarantine->pig->notes }}</td>
+                                                <td>{{ $quarantine->reason }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary remove--quarantine" data-data="{{ $quarantine }}">Remove</button>
                                                 </td>
