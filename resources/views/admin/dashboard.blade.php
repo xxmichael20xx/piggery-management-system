@@ -86,17 +86,17 @@
                                             <td>
                                                 @php
                                                     $status_color = 'success';
-                                                    $status_text = 'Active';
+                                                    $status_text = 'Healthy';
 
                                                     switch ($totalPigsSevenDay->status) {
-                                                        case 'active':
+                                                        case 'healthy':
                                                             $status_color = 'success';
-                                                            $status_text = 'Active';
+                                                            $status_text = 'Healthy';
                                                             break;
 
-                                                        case 'inactive':
+                                                        case 'unhealthy':
                                                             $status_color = 'warning';
-                                                            $status_text = 'Inactive';
+                                                            $status_text = 'Unhealthy';
                                                             break;
 
                                                         case 'on_treatment':

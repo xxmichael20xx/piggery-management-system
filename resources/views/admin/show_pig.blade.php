@@ -35,7 +35,7 @@
 
                         <div class="row mb-3">
                             <div class="col-12 text-end">
-                                @if ($pig->status == 'active')
+                                @if ($pig->status == 'healthy')
                                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addToOrdersModal">
                                         <i class="fa fa-dollar"></i> Move to Orders
                                     </button>
@@ -45,7 +45,7 @@
                                     @elseif($pig->status == 'sold')
                                         Note: Pig has been already sold!
                                     @else
-                                        Note: Pig with an status of "Active" will be able to be moved to orders!
+                                        Note: Pig with an status of "Health" will be able to be moved to orders!
                                     @endif
                                 @endif
                             </div>

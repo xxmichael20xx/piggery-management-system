@@ -137,6 +137,9 @@
                                                         <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
                                                             <option value="" selected disabled>Select a status</option>
                                                             @forelse ($statuses as $status)
+                                                                @php
+                                                                    if ( $status == 'on_treatment' || $status == 'deceased' ) continue;
+                                                                @endphp
                                                                 <option value="{{ $status }}" {{ $status == old('status') ? 'selected' : '' }}>{{ Str::headline( $status ) }}</option>
                                                             @empty
                                                                 <option value="" disabled>No available status</option>
@@ -208,17 +211,17 @@
                                             <td>
                                                 @php
                                                     $status_color = 'success';
-                                                    $status_text = 'Active';
+                                                    $status_text = 'healthy';
 
                                                     switch ($pig->status) {
-                                                        case 'active':
+                                                        case 'healthy':
                                                             $status_color = 'success';
-                                                            $status_text = 'Active';
+                                                            $status_text = 'Healthy';
                                                             break;
 
-                                                        case 'inactive':
+                                                        case 'unhealthy':
                                                             $status_color = 'warning';
-                                                            $status_text = 'Inactive';
+                                                            $status_text = 'Unhealthy';
                                                             break;
 
                                                         case 'on_treatment':

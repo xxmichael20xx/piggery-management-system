@@ -12,4 +12,8 @@ class Breed extends Model
     public function pigs() {
         return $this->hasMany( Pig::class, 'breed_id' );
     }
+
+    public function available_pigs() {
+        return $this->hasMany( Pig::class, 'breed_id' )->where( 'status', 'healthy' );
+    }
 }

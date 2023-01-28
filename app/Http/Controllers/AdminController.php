@@ -274,7 +274,7 @@ class AdminController extends Controller
         }
 
         if ( $quarantine->delete() ) {
-            $pig->status = 'active';
+            $pig->status = 'healthy';
             $pig->save();
 
             $this->newLog(
@@ -304,7 +304,7 @@ class AdminController extends Controller
         $pig = $order->pig;
 
         if ( $request->action_type == 'cancel' ) {
-            $pig->status = 'active';
+            $pig->status = 'healthy';
             $pig->save();
 
             $order->delete();

@@ -14,7 +14,7 @@ class Controller extends BaseController
 
     public function statuses() {
         return [
-            'active', 'inactive', 'on_treatment', 'quarantined', 'deceased'
+            'healthy', 'unhealthy', 'on_treatment', 'quarantined', 'deceased'
         ];
     }
 

@@ -39,6 +39,7 @@
                                             <th scope="col">Breed Number</th>
                                             <th scope="col">Breed</th>
                                             <th scope="col">Pigs Count</th>
+                                            <th scope="col">Available Pigs (Healthy)</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>
@@ -48,13 +49,14 @@
                                                 <th scope="row">{{ $breed->id }}</th>
                                                 <td>{{ $breed->name }}</td>
                                                 <td>{{ $breed->pigs->count() }}</td>
+                                                <td>{{ $breed->available_pigs->count() }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary edit--breed" data-data="{{ $breed }}">Edit</button>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4" align="center">No result(s) found</td>
+                                                <td colspan="5" align="center">No result(s) found</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
